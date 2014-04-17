@@ -68,18 +68,20 @@ def menuConnectMidi():
 
 def menuJack():
 	lcd.clear()
-	lcd.message("startar jack...")
+	lcd.message("startar ljud...")
 	call(["pkill", "jackd"]);
-	Popen(["jackd", "-P70", "-p16", "-t2000", "-dalsa", "-dhw:1", "-p512", "-n3" ,"-r44100", "-s"])
+	Popen(["jackd", "-P70", "-p16", "-t2000", "-dalsa", "-dhw:1", "-p512", "-n3" ,"-r44100", "-s", "-P"])
 	sleep(.5)
+	menuMicroSynth()
 	printMenu()
 
 def menuJack2():
 	lcd.clear()
-	lcd.message("startar jack...\n med in-port")
+	lcd.message("startar ljud...\n med in-port")
 	call(["pkill", "jackd"]);
-	Popen(["jackd", "-p20", "-t5000", "-dalsa", "-dhw:1", "-r44100", "-p512", "-n2", "-s"])
+	Popen(["jackd", "-p20", "-t5000", "-dalsa", "-dhw:1", "-r22050", "-p512", "-n2", "-s"])
 	sleep(.5)
+	menuMicroSynth()
 	printMenu()
 
 def menuMicroSynth():
@@ -256,7 +258,6 @@ btn = ((lcd.LEFT  , menuLeft),
 prev = -1
 
 menuJack()
-menuMicroSynth()
 printMenu()
 
 while True:
