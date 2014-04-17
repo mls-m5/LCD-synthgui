@@ -74,9 +74,18 @@ def menuJack():
 	sleep(.5)
 	printMenu()
 
+def menuJack2():
+	lcd.clear()
+	lcd.message("startar jack...\n med in-port")
+	call(["pkill", "jackd"]);
+	Popen(["jackd", "-p20", "-t5000", "-dalsa", "-dhw:1", "-r44100", "-p512", "-n2", "-s"])
+	sleep(.5)
+	printMenu()
+
 def menuMicroSynth():
 	lcd.clear()
 	lcd.message("startar microsynth")
+	chdir("/home/pi/kod/microsynth/")
 	call(["pkill", "microsynth"])
 	Popen(["/home/pi/kod/microsynth/microsynth", "-n", "--osc", str(oscServerPort)])
 	sleep(.5)
@@ -150,7 +159,8 @@ def menuGotoInstrumentSelect():
 	printMenu()
 
 menuMain = (("Connect midi", menuConnectMidi),
-		("starta jack", menuJack),
+		("starta jack\n bara ut", menuJack),
+		("starta jack\n med in/ut", menuJack2),
 		("starta microsynth", menuMicroSynth),
 		("Restart\nsystem", menuRestart),
 		("Uppdatera\nmicrosynth", menuUpdate),
@@ -177,9 +187,19 @@ def menuInstrumentOsc():
 	liblo.send(target, "/program", ('i', 1))
 	menuGotoMain()
 
+def menuInstrumentSampler():
+	liblo.send(target, "/program", ('i', 2))
+	menuGotoMain()
+	
+def menuInstrumentDrumMachine():
+	liblo.send(target, "/program", ('i', 3))
+	menuGotoMain()
+
 menuInstrument = (("instrument\nback", menuGotoMain),
 				("select\norgan", menuInstrumentOrgan),
-				("select\nosc", menuInstrumentOsc))
+				("select\nosc", menuInstrumentOsc),
+				("select\nsampler", menuInstrumentSampler),
+				("select\ndrum machine", menuInstrumentDrumMachine))
 
 #--------------------------------------------------------------
 
