@@ -161,8 +161,8 @@ def menuGotoInstrumentSelect():
 	printMenu()
 
 menuMain = (("Connect midi", menuConnectMidi),
-		("starta jack\n bara ut", menuJack),
-		("starta jack\n med in/ut", menuJack2),
+		("starta ljud\n bara ut", menuJack),
+		("starta ljud\n med in/ut", menuJack2),
 		("starta microsynth", menuMicroSynth),
 		("Restart\nsystem", menuRestart),
 		("Uppdatera\nmicrosynth", menuUpdate),
