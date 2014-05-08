@@ -79,7 +79,7 @@ def menuJack2():
 	lcd.clear()
 	lcd.message("startar ljud...\n med in-port")
 	call(["pkill", "jackd"]);
-	Popen(["jackd", "-p20", "-t5000", "-dalsa", "-dhw:1", "-r22050", "-p512", "-n1", "-s"])
+	Popen(["jackd", "-p20", "-t5000", "-dalsa", "-dhw:1", "-r44100", "-p512", "-n2", "-s"])
 	sleep(.5)
 	menuMicroSynth()
 	printMenu()
